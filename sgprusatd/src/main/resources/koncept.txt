@@ -1,0 +1,15 @@
+Projekt sgprusatd
+
+KONCEPT:
+- úvodní help stánka, návod
+- jediná sekvence pro id_*, začína 1
+- tabulky začínají sg*, id je id_tabulka_bez_sg, tabulky mají auditní ts_* sloupce
+- přidání projektu, tabulka sgproj [id_proj, code_proj], PK id_proj, AK kod_proj 
+- defaultny projekt kod_proj="td" 
+- základní tabulka sgtodo [id_todo, code_proj, desctiption, status, completed_at, ts_*], 
+- PK id_todo, AK code_proj, IDX id_todo, code_proj, FK code_proj->sgproj.code_proj cascade Y
+- kod ToDo správy složený z kod_proj + "-" + id_todo, tj. td-xxxx, xxxx = id_todo, tj. id tabulky sgtodo
+- změna completed na status, napojený na číselník status_td, tj. původní completed by byl status 99 - COMPLETED
+- základní statusy -10 - CANCELLED, 0 - DRAFT, 10 - STARTED, 20 - IN_PROGRESS, 50 - PAUSED, 99 - COMPLETED
+- přidání auditních údajů, ts_when_in, ts_who_in, ts_when, ts_who, po insertu ts_when_in=ts_when, ts_who_in=ts_who
+- who defaultně "me"
