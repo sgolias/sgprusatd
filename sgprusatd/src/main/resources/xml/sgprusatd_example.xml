@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML example cannot be generated; root element name is undefined -->
+<sgprusatd>
+  <tasks>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu CANCELLED</description>
+      <status>CANCELLED</status>
+    </task>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu DRAFT</description>
+      <status>DRAFT</status>
+    </task>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu STARTED</description>
+      <status>STARTED</status>
+    </task>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu IN_PROGRESS</description>
+      <status>IN_PROGRESS</status>
+    </task>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu PAUSED</description>
+      <status>PAUSED</status>
+    </task>
+    <task>
+      <code_proj>IMP</code_proj>
+      <description>Test importu COMPLETED</description>
+      <status>COMPLETED</status>
+    </task>
+  </tasks>
+</sgprusatd>

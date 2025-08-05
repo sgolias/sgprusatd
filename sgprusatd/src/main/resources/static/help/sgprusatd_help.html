@@ -1,0 +1,395 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0cm;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+@page WordSection1
+	{size:612.0pt 792.0pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;}
+div.WordSection1
+	{page:WordSection1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+
+</head>
+
+<body lang=CS link=blue vlink=purple style='word-wrap:break-word'>
+
+<div class=WordSection1>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:14.0pt'>Nápověda k projektu SGPrusaTD.</span></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Projekt umožnuje pro projekty (skupiny) vytvářet seznam
+úkolů (To-Do) a sledovat jejich plnění.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Git repository:</b> <a
+href="https://github.com/sgolias/sgprusatd">https://github.com/sgolias/sgprusatd</a></p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Spuštění:</b>            java -jar sgprusatd-0.0.1.jar r
+--server.port=9090</p>
+
+<p class=MsoNormal> - běží na http://localhost:9090/sgprusatd/info</p>
+
+<p class=MsoNormal> - defaultní port je 8080. </p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>&nbsp;</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>Projekty:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Projekty se zadávají v rámci
+vkládání úkolů. Jakmile se založí úkol do neexistujícího projektu, tak se
+založí záznam projektu s code_proj získaného z úkolu.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>key</b> projektu je <b>code_proj</b>
+z úkolu, například: TD. Je to hlavní identifikátor projektu.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>id_proj</b> - číslo - se
+přiděluje projektu automaticky a je jen pro vnitřní identifikaci v rámci
+databáze.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>Úkoly:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Základními parametry úkolů jsou:</p>
+
+<p class=MsoNormal><b>code_proj</b> - kód projektu - defaultní hodnota je TD<br>
+<b>description</b> - text úkolu - povinný (může být &quot;&quot;, nesmí být
+null)</p>
+
+<p class=MsoNormal><b>status</b> - status úkolu - nepovinný, defaultní hodnota
+je DRAFT</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>id_todo</b> - číslo - se
+přiděluje projektu automaticky a samo o sobě je jen pro vnitřní identifikaci v
+rámci databáze. Je ale součástí <b>key</b> úkolu.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>key</b> - úkolu se skládá z <b>code_proj</b>
+a <b>id_todo</b> úkolu ve tvaru například TD-1254 (projekt TD, id úkolu 1254).
+Je to hlavní identifikátor úkolu.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>completed_at</b> - časový
+záznam, kdy byl úkol splněn, tj. je COMPLETED. Je nevyplněný do doby, kdy
+status úkolu není COMPLETED. Pokud dojde k další změně statusu, tak se znovu vymaže.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal><b>Audit:</b></p>
+
+<p class=MsoNormal>Každý záznam, tj. projekt i úkol má auditní záznamy. Protože
+není registrace uživatelů, who je vždy &quot;me&quot;.</p>
+
+<p class=MsoNormal><b>ts_who_in</b> - kdo záznam vložil</p>
+
+<p class=MsoNormal><b>ts_when_in</b> - kdy se záznam vložil</p>
+
+<p class=MsoNormal><b>ts_who</b> - kdo naposled záznam upravil</p>
+
+<p class=MsoNormal><b>ts_who</b> - kdy se naposled záznam upravil</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>&nbsp;</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>REST API Endpointy aplikace:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/help               -
+tento dokument</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/info                -
+tento dokument</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/projects       -
+seznam projektů</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/<a name="_Hlk205313193">tasks</a>            
+- seznam úkolů</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>Endpoint /sgprusatd/projects -
+seznam projektů:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Endpoint má implementovanou
+metodu GET</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>GET:</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/projects                      
+- vrátí všechny projekty</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/projects/{key}          
+- vrátí projekt definovaný dle key</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>Endpoint /sgprusatd/tasks -
+seznam úkolů:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Endpoint má implementované metody
+GET, POST, PUT, DELETE.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>GET:</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/tasks                            
+- vrátí všechny úkoly</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Je možno doplnit parametry
+vyhledávání úkolů dle</p>
+
+<p class=MsoNormal style='margin-left:2.25pt;text-indent:33.15pt'> - status -
+pro zadání statusu úkolů a</p>
+
+<p class=MsoNormal style='margin-left:2.25pt;text-indent:33.15pt'>- code_proj -
+pro zadání projektu, do kterého úkol patří</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Nezadané parametry se
+nezohledňují.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Příklad: /sgprusatd/tasks?status=COMPLETED&amp;proj=TD</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Vrátí všechny úkoly se statusem
+COMPELTED v projektu TD.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>/sgprusatd/tasks/{key}                
+- vrátí úkol odpovídající kódu key</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal>POST:</p>
+
+<p class=MsoNormal>/sgprusatd/tasks                              - vkládá úkol
+do aplikace</p>
+
+<p class=MsoNormal>code_proj - kód projektu - nepovinný, defaultní hodnota je
+TD</p>
+
+<p class=MsoNormal>description - text úkolu - povinný (může být &quot;&quot;,
+nesmí být null)</p>
+
+<p class=MsoNormal>status - status úkolu - nepovinný, defaultní hodnota je
+DRAFT</p>
+
+<p class=MsoNormal>Povolené hodnoty jsou: CANCELLED, DRAFT, STARTED,
+IN_PROGRESS, PAUSED, COMPLETED</p>
+
+<p class=MsoNormal>Příklad:<br>
+{</p>
+
+<p class=MsoNormal>  &quot;code_proj&quot;: &quot;PRG&quot;,</p>
+
+<p class=MsoNormal>  &quot;description&quot;: &quot;Úkol pro projekt PRG&quot;,</p>
+
+<p class=MsoNormal>  &quot;status&quot;: &quot;CANCELLED&quot;</p>
+
+<p class=MsoNormal>}</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>PUT:</p>
+
+<p class=MsoNormal>/sgprusatd/tasks/{key}                  - upravuje úkol
+odpovídající kódu key</p>
+
+<p class=MsoNormal>description - nový text ukolu - nepovinný</p>
+
+<p class=MsoNormal>status - nový status úkolu - nepovinný</p>
+
+<p class=MsoNormal>Nezadané nebo null hodnoty se nemění.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>DELETE:</p>
+
+<p class=MsoNormal>/sgprusatd/tasks/{key}                  - smaže úkol
+odpovídající kódu key</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>&nbsp;</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'><b>Endpoint /sgprusatd/tasks/import
+- hromadný import úkolů:</b></p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>Endpoint má implementovanou metodu
+POST.</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>&nbsp;</p>
+
+<p class=MsoNormal style='margin-left:2.25pt'>POST:</p>
+
+<p class=MsoNormal>/sgprusatd/<a name="_Hlk205320448">tasks/import</a>              
+- hromadný import úkolů v xml formátu v struktuře</p>
+
+<p class=MsoNormal>&lt;<u>sgprusatd</u>&gt;</p>
+
+<p class=MsoNormal>  &lt;tasks&gt;</p>
+
+<p class=MsoNormal>    &lt;task&gt;</p>
+
+<p class=MsoNormal>      &lt;code_proj&gt;IMP&lt;/code_proj&gt;</p>
+
+<p class=MsoNormal>      &lt;description&gt;Test <u>importu</u> CANCELLED&lt;/description&gt;</p>
+
+<p class=MsoNormal>      &lt;status&gt;CANCELLED&lt;/status&gt;</p>
+
+<p class=MsoNormal>    &lt;/task&gt;</p>
+
+<p class=MsoNormal>  &lt;/tasks&gt;</p>
+
+<p class=MsoNormal>&lt;/sgprusatd&gt;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Poznámky od programátora:</b></p>
+
+<p class=MsoNormal>Aplikace využívá interní in-memory databázi založenou na ConcurrentHashMap
+z důvodu umožnění více</p>
+
+<p class=MsoNormal>vláknového zpracování dat a postavení aplikace na ukládání
+dat dle key. Jediné prohledávání celých tabulek v aplikaci je při vyhledávání
+úkolů dle statusu a projektu. Pokud bychom chtěli zrychlit i tuto část, dala by
+vystavět pomocná struktura, která by byla obdobou indexu v databázích.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Fiktívně se vytvářejí 2 tabulky <br>
+sgproj s PK id_proj umístěná v objektu ProjectsStorage</p>
+
+<p class=MsoNormal>sgtodo s PK id_todo umístěná v objektu TasksStorage</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Pro plnění id je definována sekvence tabID, která je
+společná pro všechny tabulky.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>Rozšířené zadání:</b></p>
+
+<p class=MsoNormal>API s nahráváním CSV:  :-(  omlouvám, se dělal sem po paměti
+a byl jsem v tom, že máme implementovat XML. U csv by to bylo obdobné, jen jako
+vstup by byl @PostMapping s MediaType.TEXT_PLAIN_VALUE zpracovaný třeba s OpenCSV.</p>
+
+<p class=MsoNormal>Počet vyřešených úkolů po dnech: jsem nestihl (chtěl jsem,
+aby aplikace měla ucelený smysl), ale už by to nebyl problém. Bylo by to jako u
+seznamu dle projektu a statusu, akorát by se třeba ze dnů udělala mapa a každý splněný
+úkol by navyšoval uloženou hodnotu +1. Nakonec by se mapa převedla do GET.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b>API s uložením dat v databázi:</b></p>
+
+<p class=MsoNormal>Při přechodu na ukládání dat do databáze by bylo nutné
+nejvíce zasáhnout do tříd ProjectsStorage a TasksStorage. Tyto třídy by bylo
+vhodné vzhledem na Spring Boot aplikaci nahradit JPA entitami, doplněnými o
+potřebné anotace a atributy pro Hibernate.<br>
+Alternativně pokud bychom pracovali přímo s JDBC drivery, tak u nás v práci
+máme vystavěný systém založený na Datasouces, které jsou definované v xml.
+Tohle je ale asi interní objekt Elanoru.</p>
+
+<p class=MsoNormal>&lt;datasource name=&quot;ZalSmis&quot;&gt;</p>
+
+<p class=MsoNormal>                &lt;query&gt;&lt;![CDATA[select $p{columns}
+from ceccish</p>
+
+<p class=MsoNormal>                where ceccish.ciselnik  = $P{ciselnik}</p>
+
+<p class=MsoNormal>                ]]&gt;&lt;/query&gt;</p>
+
+<p class=MsoNormal>    &lt;table&gt;ceccish&lt;/table&gt;</p>
+
+<p class=MsoNormal>                &lt;fields&gt;</p>
+
+<p class=MsoNormal>                               &lt;field
+path=&quot;ceccish.hodnota&quot;/&gt;</p>
+
+<p class=MsoNormal>                               &lt;field
+path=&quot;ceccish.zkr&quot;/&gt;</p>
+
+<p class=MsoNormal>    &lt;/fields&gt;<br>
+&lt;/datasource&gt;</p>
+
+<p class=MsoNormal>Aplikované v java</p>
+
+<p class=MsoNormal>Memory m = getForm().readMem(&quot;ZalSmis&quot;<b>, </b>&quot;ciselnik
+&quot;<b>, &quot;</b>lang<b>&quot;</b>)<b>;<br>
+</b>Memory je kolekce row a hromady metadat.</p>
+
+<p class=MsoNormal>Vůči databázi m.Save, m.SaveAndCommit, m.Commit.<br>
+Memory ví, které záznamy byli změněny, přidány.</p>
+
+<p class=MsoNormal>Má metody, jak z už načtených dat vracet jen některé, zadáním
+podmínek. ... .</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Ještě jsem v projektu uvažoval o použití in-memory H2 databáze,
+která běží v paměti, ale umí ukládat i na disk.</p>
+
+<p class=MsoNormal>Používá ji interně i datasource, protože umožňuje ukládat
+velké množství dat a nezaplní RAM.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>Z reálných databází jsou použitelné asi libovolné Oracle, MS
+SQL (ty jsou ale placené), takže Postgres nebo mySQL je asi dobrá volba.</p>
+
+<p class=MsoNormal>O NoSQL, třeba MongoDB, databázích moc neví. Ale hodí se na
+ukládání třeba dokumentů. Takže kdyby úkoly měli mít u sebe návody, výkresy,
+..., tak ty by se dali ukládat do noSQL DB.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
+</body>
+
+</html>

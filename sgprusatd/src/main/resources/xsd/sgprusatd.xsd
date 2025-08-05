@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:simpleType name="StatusTasksType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CANCELLED" />
+			<xs:enumeration value="DRAFT" />
+			<xs:enumeration value="STARTED" />
+			<xs:enumeration value="IN_PROGRESS" />
+			<xs:enumeration value="PAUSED" />
+			<xs:enumeration value="COMPLETED" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="sgprusatd">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="tasks">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="task" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="code_proj" type="xs:string" />
+										<xs:element name="description" type="xs:string" />
+										<xs:element name="status" type="StatusTasksType" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

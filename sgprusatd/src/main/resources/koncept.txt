@@ -5,7 +5,7 @@ KONCEPT:
 - jediná sekvence pro id_*, začína 1
 - tabulky začínají sg*, id je id_tabulka_bez_sg, tabulky mají auditní ts_* sloupce
 - přidání projektu, tabulka sgproj [id_proj, code_proj], PK id_proj, AK kod_proj 
-- defaultny projekt kod_proj="td" 
+- defaultny projekt kod_proj="TD" 
 - základní tabulka sgtodo [id_todo, code_proj, desctiption, status, completed_at, ts_*], 
 - PK id_todo, AK code_proj, IDX id_todo, code_proj, FK code_proj->sgproj.code_proj cascade Y
 - kod ToDo správy složený z kod_proj + "-" + id_todo, tj. td-xxxx, xxxx = id_todo, tj. id tabulky sgtodo
